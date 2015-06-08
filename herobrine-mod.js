@@ -1,8 +1,8 @@
 // Mod by neo091
 // version 0.0.1
 
-ModPE.setItem(499,"blaze_rod",0,"Dragon Flame Sword");
-Item.addCraftRecipe(499,1,0,[4,1,0, 50,1,0, 280,1,0]);
+ModPE.setItem(501,"blaze_rod",0,"Dragon Flame Sword");
+Item.addCraftRecipe(501,1,0,[4,1,0, 50,1,0, 280,1,0]);
 
 var button_1;  //A window we haven't yet made
 var herobrine, GUI, layout, herobnt, is_herobrine;
