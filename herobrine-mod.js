@@ -17,15 +17,8 @@ function dip2px(ctx, dips){
 function sgMessage(msg){
 
 	clientMessage(ChatColor.BLUE + "[mod]: " + ChatColor.WHITE + msg);
-
 }
 
-function getTime(){
-
-
-
-
-}
 function  newLevel() {  //As soon as the world loads
   var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
   //A variable we'll use later to add the button to the current MCPE activity            
