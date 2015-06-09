@@ -19,6 +19,7 @@ function newLevel() { //load world
 				onClick: function(v) {
 
 					if(ZoomCount == 0){
+						v.setText("Zoom + 1");
 						ModPE.setFov(40.1);
 						ZoomCount = 1;
 					}else if(ZoomCount == 1){
