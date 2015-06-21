@@ -1,21 +1,19 @@
 /*
-repair-tools
-By Neo091
-https://github.com/neo091/ModPE-Script
+// Repair Tools mod by neo091
+//https://github.com/neo091/ModPE-Script
+// version 0.2
 */
-Block.defineBlock(200,"Repair Table", [["mob_spawner",0],["crafting_table",0],["mob_spawner",0],["mob_spawner",0],["mob_spawner",0],["mob_spawner",0]],0,false);
-Block.setDestroyTime(200,0.10);
-//Block.setShape(200,0,0.5,0,1,1,1);
-Block.setLightLevel(200,15);
-Block.setLightOpacity(200,.0000001);
-Item.addCraftRecipe(200, 1, 0, [4, 1, 0, 265, 1, 0]);
+Block.defineBlock(254,"Repair Table", [["mob_spawner",0],["crafting_table",0],["mob_spawner",0],["mob_spawner",0],["mob_spawner",0],["mob_spawner",0]],0,false);
+Block.setDestroyTime(254,0.10);
+Item.addShapedRecipe(254, 1, 0, ["sss", "s s", "sss"], ["s", 3, 0]);
+Player.addItemCreativeInv(254, 1);
 
 ModPE.setItem(459, "shovel", 4, "Get Repair Table");
-Item.setCategory(459, 2);
-Item.addCraftRecipe(459, 1, 0, [4, 1, 0, 5, 2, 0]);
+Item.setCategory(459, 1);
+Item.addShapedRecipe(459, 1, 0, ["sss", " f ", " f "], ["s", 3, 0, "f", 280, 0]);
 
 var Tools = [256, 257, 258, 267, 292, 272, 273, 274, 275, 291, 268, 269, 270, 271, 290, 306, 307, 308, 309];
-var RepairTable = 200;
+var RepairTable = 254;
 var craftingtable = 58;
 var IronBlock = 42,itemName,ironIngot = 265, woodId = 5, CobblestoneId = 4;
 var repairIngots = 0, minDesgaste=0,repairWood = 0,repairCobblestone = 0;
@@ -88,7 +86,7 @@ function useItem(x,y,z,itemId,blockId,side){
 		itemId == Tools[11] || 
 		itemId == Tools[12] || itemId == Tools[13] 
 		|| itemId == Tools[14] || itemId == Tools[15] || itemId == Tools[16] || 
-		itemId == Tools[17]){
+		itemId == Tools[17] || itemId == Tools[18]){
 		if(blockId == RepairTable)
 		{
 			var pcid = Player.getCarriedItemData();
@@ -126,7 +124,7 @@ function useItem(x,y,z,itemId,blockId,side){
 			preventDefault();
 			var maxDesgaste = Player.getCarriedItemCount();
 			desgasteIngotSlot(maxDesgaste, itemId);
-			Level.dropItem(x, y+1, z, 0, 200, 1);
+			Level.dropItem(x, y+1, z, 0, RepairTable, 1);
 			Level.playSound(Player.getX(),Player.getY(),Player.getZ(),"random.burp", 30, 25);
 		}
 	}
@@ -154,7 +152,7 @@ function addIngots(iditem){
 
 function removeIngot(myItem){
 	
-	if(myItem == 256 || myItem == 257 || myItem == 258 || myItem == 267 || myItem == 292)
+	if(myItem == 256 || myItem == 257 || myItem == 258 || myItem == 267 || myItem == 292 || myItem == 306 || myItem == 307 || myItem == 308 || myItem == 309)
 	{
 		//Iron
 		if(repairIngots == 0){
@@ -204,7 +202,8 @@ function getItemName(itemId){
 	var myItem = itemId.toString();
 	var myItemName = {'256':'Iron Shovel','257':'Iron Pickaxe','258':'Iron Axe','267':'Iron Sword','292':'Iron Hoe',
 	'272':'Stone Sword','273':'Stone Shovel','274':'Stone Pickaxe','275':'Stone Axe','291':'Stone Hoe',
-	'268':'Wooden Sword', '269':'Wooden Shovel','270':'Wooden Pickaxe','271':'Wooden Axe','290':'Wooden Hoe'};
+	'268':'Wooden Sword', '269':'Wooden Shovel','270':'Wooden Pickaxe','271':'Wooden Axe','290':'Wooden Hoe',
+	'306':'Iron Helmet','307':'Iron Chestplate','308':'Iron Leggings','309':'Iron Boots'};
 
 	var itemName = myItemName[myItem];
 	//clientMessage(itemName + " ITEM: " + myItem);
@@ -251,8 +250,8 @@ function leaveGame(){
 }
 
 function destroyBlock(x, y, z, side){
-	if(Level.getTile(x, y, z) == 200){
+	if(Level.getTile(x, y, z) == RepairTable){
 		Level.destroyBlock(x, y, z, false);
-		Level.dropItem(x, y, z, 0, 200, 1);
+		Level.dropItem(x, y, z, 0, RepairTable, 1);
 	}
 }
